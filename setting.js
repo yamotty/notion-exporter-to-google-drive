@@ -75,11 +75,6 @@ function loadSettings() {
     settingsSheet.getRange('A2:A3').setValues([['NotionデータベースID'], ['Google DriveフォルダID']]);
     settingsSheet.getRange('B2:B3').setValues([['ここにデータベースIDを入力'], ['ここにフォルダIDを入力']]);
     
-    // 説明を追加
-    settingsSheet.getRange('A5:B5').setValues([['説明', '']]).setFontWeight('bold');
-    settingsSheet.getRange('A6:B6').setValues([['NotionデータベースID', 'NotionのデータベースIDを入力してください（例: 123e4567-e89b-12d3-a456-426614174000）']]);
-    settingsSheet.getRange('A7:B7').setValues([['Google DriveフォルダID', 'エクスポートしたDocsを保存するフォルダIDを入力してください']]);
-    
     // 書式設定
     settingsSheet.getRange('B2:B3').setBackground('#f3f3f3');
     settingsSheet.getRange('A6:A7').setFontStyle('italic');
