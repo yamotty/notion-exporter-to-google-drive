@@ -22,9 +22,18 @@ Notion DB ExporterはNotionデータベースの内容を自動的にGoogle Docs
 3. エクスポート対象のNotionデータベース
 4. エクスポート先のGoogle Driveフォルダ
 
-### セットアップ手順
+## セットアップ手順
 
-#### 1. Notion API統合の設定
+#### 1. スプレッドシートの準備
+1. [Google Sheets](https://sheets.google.com)で新しいスプレッドシートを作成
+2. 「拡張機能」→「Apps Script」をクリックしてスクリプトエディタを開く
+3. デフォルトの`Code.gs`ファイルを削除
+4. このリポジトリの各JavaScriptファイルをインポート:
+   - 各ファイルの内容をコピーして、同名の`.gs`ファイルとして貼り付け
+   - 例: `main.js`の内容を`Main.gs`として保存
+5. `appsscript.json`の内容を設定ファイルとして保存
+
+#### 2. Notion API統合の設定
 
 1. [Notion Developers](https://www.notion.so/my-integrations) ページにアクセス
 2. 「New integration」をクリック
@@ -36,13 +45,13 @@ Notion DB ExporterはNotionデータベースの内容を自動的にGoogle Docs
    - 右上の「...」をクリック
    - 「Add connections」→先ほど作成した統合を選択
 
-#### 2. Google Apps Scriptプロジェクトの作成
+#### 3. Google Apps Scriptプロジェクトの作成
 
 1. [Google Drive](https://drive.google.com)にアクセス
 2. 「新規」→「その他」→「Google Apps Script」をクリック
 3. プロジェクト名を「Notion DB Exporter」などに変更
 
-#### 3. コードのインポート
+#### 4. コードのインポート
 
 1. デフォルトの`Code.gs`ファイルを削除
 2. 次の7つのファイルを作成し、対応するコードをコピー&ペースト:
@@ -54,13 +63,13 @@ Notion DB ExporterはNotionデータベースの内容を自動的にGoogle Docs
    - `BatchProcessor.gs`
    - `DifferentialExporter.gs`
 
-#### 4. Drive APIの有効化
+#### 5. Drive APIの有効化
 
 1. Apps Scriptエディタの左側にある「サービス」アイコンをクリック
 2. 「サービスを追加」ボタンをクリック
 3. リストから「Drive API」を選択し、「追加」ボタンをクリック
 
-#### 5. スプレッドシートの作成
+#### 6. スプレッドシートの作成
 
 1. [Google Sheets](https://sheets.google.com)にアクセス
 2. 新しいスプレッドシートを作成し、任意の名前を付ける
@@ -119,7 +128,11 @@ Notion DB ExporterはNotionデータベースの内容を自動的にGoogle Docs
 これらの設定は `BatchProcessor.gs` ファイル内の `BATCH_SIZE` 変数を変更することでカスタマイズできます。
 
 ### トラブルシューティング
+#### スプレッドシート連携の問題
+- **メニューが表示されない**: ブラウザをリフレッシュするか、一度スプレッドシートを閉じて再度開いてください
+- **「スクリプトが見つかりません」エラー**: Apps Scriptのデプロイメントが正しく設定されているか確認してください
 
+#### Notion APIの問題
 - **APIキーエラー**: APIキーが正しく設定されているか確認してください
 - **データベースIDエラー**: NotionデータベースIDが正しいこと、そのデータベースに統合がアクセスできることを確認してください
 - **アクセス権限エラー**: Google Driveフォルダにスクリプトからアクセスできるか確認してください
@@ -143,6 +156,13 @@ Notion DB ExporterはNotionデータベースの内容を自動的にGoogle Docs
 - テーブルは完全にはサポートされていません（プレースホルダを表示）
 - トグルブロックは視覚的な表現のみサポート
 - Notionの画像が有効期限切れの場合、挿入できないことがあります
+
+## 使用時の注意点
+
+1. このツールはスプレッドシートとGoogle Apps Scriptがセットで機能します
+2. スプレッドシートを開いたまま処理を実行する必要があります
+3. バッチ処理中はスプレッドシートを閉じないでください
+4. 大量のドキュメントを処理する場合は、バッチサイズを調整してください
 
 ## よくある質問
 
