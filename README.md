@@ -1,11 +1,9 @@
-# Notion DB Exporter
+Notion DB Exporterは、Notionデータベースの内容を自動的にGoogle DocsドキュメントとしてエクスポートするためのGoogle Apps Scriptとスプレッドシートを組み合わせたツールです。スプレッドシートから簡単な操作でNotionの各ページを個別のGoogle Docsファイルに変換し、リッチテキスト書式、画像、リスト、見出しなどの要素を保持します。Notionで管理した情報をGoogle Workspace環境で活用したい方に最適です。
 
-Notion DB ExporterはNotionデータベースの内容を自動的にGoogle DocsとしてエクスポートするためのGoogle Apps Scriptプロジェクトです。Notionの各エントリーを個別のGoogle Docsドキュメントとして保存し、書式設定や画像も保持します。
-
-## 機能
+# 機能
 
 - NotionデータベースからすべてのページをGoogle Docsとして自動エクスポート
-- **差分エクスポート機能** - 新規または更新されたページのみを処理（時間効率化）
+- 差分エクスポート機能 - 新規または更新されたページのみを処理（時間効率化）
 - リッチテキスト書式（太字、斜体、取り消し線、コードなど）の保持
 - 画像のインポート
 - リスト（箇条書きと番号付き）のサポート
@@ -13,9 +11,9 @@ Notion DB ExporterはNotionデータベースの内容を自動的にGoogle Docs
 - 処理結果の詳細なログ
 - バッチ処理機能（大量データ用）- Google Apps Scriptの実行時間制限を回避
 
-## 環境構築
+# 環境構築
 
-### 前提条件
+## 前提条件
 
 1. Googleアカウント
 2. Notionアカウントと統合用のAPIキー
@@ -24,7 +22,7 @@ Notion DB ExporterはNotionデータベースの内容を自動的にGoogle Docs
 
 ## セットアップ手順
 
-#### 1. スプレッドシートの準備
+### 1. スプレッドシートの準備
 1. [Google Sheets](https://sheets.google.com)で新しいスプレッドシートを作成
 2. 「拡張機能」→「Apps Script」をクリックしてスクリプトエディタを開く
 3. デフォルトの`Code.gs`ファイルを削除
@@ -33,7 +31,7 @@ Notion DB ExporterはNotionデータベースの内容を自動的にGoogle Docs
    - 例: `main.js`の内容を`Main.gs`として保存
 5. `appsscript.json`の内容を設定ファイルとして保存
 
-#### 2. Notion API統合の設定
+### 2. Notion API統合の設定
 
 1. [Notion Developers](https://www.notion.so/my-integrations) ページにアクセス
 2. 「New integration」をクリック
@@ -45,13 +43,13 @@ Notion DB ExporterはNotionデータベースの内容を自動的にGoogle Docs
    - 右上の「...」をクリック
    - 「Add connections」→先ほど作成した統合を選択
 
-#### 3. Google Apps Scriptプロジェクトの作成
+### 3. Google Apps Scriptプロジェクトの作成
 
 1. [Google Drive](https://drive.google.com)にアクセス
 2. 「新規」→「その他」→「Google Apps Script」をクリック
 3. プロジェクト名を「Notion DB Exporter」などに変更
 
-#### 4. コードのインポート
+### 4. コードのインポート
 
 1. デフォルトの`Code.gs`ファイルを削除
 2. 次の7つのファイルを作成し、対応するコードをコピー&ペースト:
@@ -63,13 +61,13 @@ Notion DB ExporterはNotionデータベースの内容を自動的にGoogle Docs
    - `BatchProcessor.gs`
    - `DifferentialExporter.gs`
 
-#### 5. Drive APIの有効化
+### 5. Drive APIの有効化
 
 1. Apps Scriptエディタの左側にある「サービス」アイコンをクリック
 2. 「サービスを追加」ボタンをクリック
 3. リストから「Drive API」を選択し、「追加」ボタンをクリック
 
-#### 6. スプレッドシートの作成
+### 6. スプレッドシートの作成
 
 1. [Google Sheets](https://sheets.google.com)にアクセス
 2. 新しいスプレッドシートを作成し、任意の名前を付ける
@@ -78,7 +76,7 @@ Notion DB ExporterはNotionデータベースの内容を自動的にGoogle Docs
 5. 「Execute as」で「Me」を選択、「Who has access」で「Anyone」を選択
 6. 「Deploy」をクリック
 
-### 使用方法
+## 使用方法
 
 1. 作成したスプレッドシートを開く
 2. 最初の実行時は新しく追加された「Notion Export」メニューが表示されるまで、ページを更新する必要があるかもしれません
@@ -92,7 +90,7 @@ Notion DB ExporterはNotionデータベースの内容を自動的にGoogle Docs
    - **差分エクスポート**: 新規または更新されたページのみを処理します（日常的な更新用）
    - **バッチ処理でエクスポート**: 大量のデータを処理する場合（30ページ以上）
 
-### 差分エクスポート機能の使用方法
+## 差分エクスポート機能の使用方法
 
 差分エクスポートは、前回のエクスポート以降に新規作成または更新されたページのみを処理します。これにより処理時間が大幅に短縮され、Google Apps Scriptの実行時間制限（6分）内に収まるようになります。
 
@@ -110,7 +108,7 @@ Notion DB ExporterはNotionデータベースの内容を自動的にGoogle Docs
 - Google Docsの更新（更新されたページは既存のドキュメントを上書き）
 - エクスポート結果にスキップされたページも表示（結果の確認が容易）
 
-### バッチ処理の使用方法
+## バッチ処理の使用方法
 
 バッチ処理は、Google Apps Scriptの実行時間制限（6分）を回避するために、大きなデータベースを小さなバッチに分けて処理します。
 
@@ -127,12 +125,12 @@ Notion DB ExporterはNotionデータベースの内容を自動的にGoogle Docs
 
 これらの設定は `BatchProcessor.gs` ファイル内の `BATCH_SIZE` 変数を変更することでカスタマイズできます。
 
-### トラブルシューティング
-#### スプレッドシート連携の問題
+## トラブルシューティング
+### スプレッドシート連携の問題
 - **メニューが表示されない**: ブラウザをリフレッシュするか、一度スプレッドシートを閉じて再度開いてください
 - **「スクリプトが見つかりません」エラー**: Apps Scriptのデプロイメントが正しく設定されているか確認してください
 
-#### Notion APIの問題
+### Notion APIの問題
 - **APIキーエラー**: APIキーが正しく設定されているか確認してください
 - **データベースIDエラー**: NotionデータベースIDが正しいこと、そのデータベースに統合がアクセスできることを確認してください
 - **アクセス権限エラー**: Google Driveフォルダにスクリプトからアクセスできるか確認してください
